@@ -122,4 +122,5 @@ app.MapPatch("/api/camels/{id}", async (
     catch{return Results.Problem("Adatbázis hiba");}
 });
 
-app.Run();
+var port = Environment.GetEnvironmentVariable("PORT") ?? "5000";
+app.Run($"http://*:{port}");
