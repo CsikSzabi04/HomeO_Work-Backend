@@ -36,7 +36,7 @@ app.MapGet("/api/camels", async (AppDbContext db) =>{
 app.MapGet("/api/camels/{id}", async (int id, AppDbContext db) =>{
     try{
         var camel = await db.Camels.FindAsync(id);
-        return camel != null ? Results.Ok(camel) : Results.NotFound(new { error = "Nincs ilyen teve!", id });
+        return camel != null ? Results.Ok(camel) : Results.NotFound(new { error = "404 Not Found", id });
     }
     catch{return Results.Problem("Adatbázis hiba");}
 });
@@ -63,7 +63,7 @@ app.MapPost("/api/camels", async (
 app.MapDelete("/api/camels/{id}", async (int id, AppDbContext db) =>{
     try{
         var camel = await db.Camels.FindAsync(id);
-        if (camel == null) return Results.NotFound(new { error = "Nincs ilyen teve!", id });
+        if (camel == null) return Results.NotFound(new { error = "404 Not Found", id });
 
         db.Camels.Remove(camel);
         await db.SaveChangesAsync();
@@ -80,7 +80,7 @@ app.MapPut("/api/camels/{id}", async (
     IValidator<Camel> validator) =>{
     try{
         var camel = await db.Camels.FindAsync(id);
-        if (camel == null) return Results.NotFound(new { error = "Nincs ilyen teve!", id });
+        if (camel == null) return Results.NotFound(new { error = "404 Not Found", id });
 
         var result = await validator.ValidateAsync(updatedCamel);
         if (!result.IsValid) return Results.ValidationProblem(result.ToDictionary());
@@ -105,7 +105,7 @@ app.MapPatch("/api/camels/{id}", async (
     IValidator<Camel> validator) => {
     try{
         var camel = await db.Camels.FindAsync(id);
-        if (camel == null) return Results.NotFound(new { error = "Nincs ilyen teve!", id });
+        if (camel == null) return Results.NotFound(new { error = "404 Not Found", id });
         if (!string.IsNullOrEmpty(partialCamel.Name)) camel.Name = partialCamel.Name;
         if (partialCamel.Color != null) camel.Color = partialCamel.Color;
         if (partialCamel.HumpCount > 0) camel.HumpCount = partialCamel.HumpCount;
@@ -124,4 +124,3 @@ app.MapPatch("/api/camels/{id}", async (
 
 var port = Environment.GetEnvironmentVariable("PORT") ?? "5190";
 app.Run($"http://*:{port}");
-
