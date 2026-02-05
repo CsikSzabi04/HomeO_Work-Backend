@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\CamelApp.API.props" />
+</Project>

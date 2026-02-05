@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "OzVy5AQiED3/tWrTWMZR7tO1i+CW6DHD18AL2tpYGoI=",
+  "Source": "CamelApp.API",
+  "BasePath": "_content/CamelApp.API",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
