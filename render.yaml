@@ -1,0 +1,12 @@
+# render.yaml
+services:
+  - type: web
+    name: camel-api
+    env: dotnet
+    buildCommand: dotnet publish -c Release -o output
+    startCommand: ./output/CamelApp.API
+    envVars:
+      - key: ASPNETCORE_ENVIRONMENT
+        value: Production
+      - key: PORT
+        value: 8080
